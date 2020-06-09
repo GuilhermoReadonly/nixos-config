@@ -30,6 +30,8 @@
     bluetooth.enable = true;
   };
 
+  nixpkgs.config.allowUnfree = true;
+
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
   # replicates the default behaviour.
@@ -71,7 +73,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    wget vim firefox emacs gnome3.nautilus gnome3.gedit git killall libsForQt5.vlc gimp alacritty pstree neofetch
+    wget vim firefox emacs gnome3.nautilus gnome3.gedit git killall libsForQt5.vlc gimp alacritty pstree neofetch vscode
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
