@@ -32,13 +32,15 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  # The global useDHCP flag is deprecated, therefore explicitly set to false here.
-  # Per-interface useDHCP will be mandatory in the future, so this generated config
-  # replicates the default behaviour.
   networking = {
     hostName = "nixos-718"; # Define your hostname.
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+
+    # The global useDHCP flag is deprecated, therefore explicitly set to false here.
     useDHCP = false;
+
+    # Per-interface useDHCP will be mandatory in the future, so this generated config
+    # replicates the default behaviour.
     interfaces.wlp2s0.useDHCP = true;
     networkmanager.enable = true; 
 
@@ -84,7 +86,10 @@
   #   enableSSHSupport = true;
   #   pinentryFlavor = "gnome3";
   # };
-  programs.nm-applet.enable = true;
+  programs = {
+    nm-applet.enable = true;
+    dconf.enable = true;
+  };
 
   services = {
     fstrim.enable = true;
