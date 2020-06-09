@@ -75,7 +75,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    wget vim firefox emacs gnome3.nautilus gnome3.gedit git killall libsForQt5.vlc gimp alacritty pstree neofetch vscode
+    wget vim firefox emacs gnome3.nautilus gnome3.gedit git killall libsForQt5.vlc gimp alacritty pstree neofetch vscode jmtpfs
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -89,6 +89,7 @@
   programs = {
     nm-applet.enable = true;
     dconf.enable = true;
+    adb.enable = true;
   };
 
   services = {
@@ -141,7 +142,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.guilhermo = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ]; # wheel = enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "networkmanager" "adbusers" ]; # wheel = enable ‘sudo’ for the user.
   };
 
   system = {
