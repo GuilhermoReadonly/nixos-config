@@ -56,8 +56,6 @@
     firewall.enable = true;
   };
 
-
-
   # Select internationalisation properties.
   i18n = {
     defaultLocale = "en_US.UTF-8";
@@ -74,9 +72,12 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    wget vim firefox emacs gnome3.nautilus gnome3.gedit git killall libsForQt5.vlc gimp alacritty pstree neofetch vscode jmtpfs
-  ];
+  environment = {
+    systemPackages = with pkgs; [
+      wget vim firefox emacs gnome3.nautilus gnome3.gedit git killall libsForQt5.vlc gimp alacritty pstree neofetch vscode jmtpfs
+      nmap nmap-graphical
+    ];
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -97,21 +98,19 @@
     openssh.enable = true;
     xserver = {
       # Enable the X11 windowing system.
-      # enable = true;
-      # layout = "us";
-      # xkbOptions = "eurosign:e";
-
-      # Enable the KDE Desktop Environment.
-      # displayManager.sddm.enable = true;
-      # desktopManager.plasma5.enable = true;
 
       enable = true;
       layout = "fr";
       xkbOptions = "eurosign:e";
       desktopManager = {
         xterm.enable = false;
+
+        # Enable the KDE Desktop Environment.
+        plasma5.enable = true;
       };
       displayManager = {
+        sddm.enable = true;
+        #lightdm.enable = true;
         defaultSession = "none+i3";
       };
       windowManager.i3 = {
@@ -123,6 +122,7 @@
           i3lock #default i3 screen locker
           #i3blocks #if you are planning on using i3blocks over i3status
        ];
+       configFile = /etc/nixos/i3/config;
       };
 
       # Enable touchpad support.
