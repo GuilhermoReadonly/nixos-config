@@ -5,10 +5,9 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Use the GRUB 2 boot loader.
   boot.loader.grub = {
@@ -42,7 +41,7 @@
     # Per-interface useDHCP will be mandatory in the future, so this generated config
     # replicates the default behaviour.
     interfaces.wlp2s0.useDHCP = true;
-    networkmanager.enable = true; 
+    networkmanager.enable = true;
 
     # Configure network proxy if necessary
     # proxy.default = "http://user:password@proxy:port/";
@@ -57,15 +56,12 @@
   };
 
   # Select internationalisation properties.
-  i18n = {
-    defaultLocale = "en_US.UTF-8";
-   };
+  i18n = { defaultLocale = "en_US.UTF-8"; };
 
   console = {
     font = "Lat2-Terminus16";
     keyMap = "fr";
   };
-
 
   # Set your time zone.
   time.timeZone = "Europe/Paris";
@@ -74,8 +70,31 @@
   # $ nix search wget
   environment = {
     systemPackages = with pkgs; [
-      wget vim firefox emacs gnome3.nautilus gnome3.gedit git killall libsForQt5.vlc gimp alacritty pstree neofetch vscode jmtpfs
-      nmap nmap-graphical
+      wget
+      vim
+      firefox
+      emacs
+      gnome3.nautilus
+      gnome3.gedit
+      git
+      killall
+      libsForQt5.vlc
+      gimp
+      alacritty
+      pstree
+      neofetch
+      vscode
+      jmtpfs
+      nmap
+      nmap-graphical
+      gcc
+      rustup
+      transmission
+      transmission-gtk
+      opera
+      unzip
+      nixfmt
+      libreoffice
     ];
   };
 
@@ -98,7 +117,6 @@
     openssh.enable = true;
     xserver = {
       # Enable the X11 windowing system.
-
       enable = true;
       layout = "fr";
       xkbOptions = "eurosign:e";
@@ -117,12 +135,12 @@
         enable = true;
         package = pkgs.i3-gaps;
         extraPackages = with pkgs; [
-          dmenu #application launcher most people use
+          dmenu # application launcher most people use
           i3status # gives you the default i3 status bar
-          i3lock #default i3 screen locker
+          i3lock # default i3 screen locker
           #i3blocks #if you are planning on using i3blocks over i3status
-       ];
-       configFile = /etc/nixos/i3/config;
+        ];
+        configFile = /etc/nixos/i3/config;
       };
 
       # Enable touchpad support.
@@ -140,9 +158,25 @@
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.guilhermo = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "adbusers" ]; # wheel = enable ‘sudo’ for the user.
+  users.users = {
+    guilhermo = {
+      isNormalUser = true;
+      extraGroups = [
+        "wheel"
+        "networkmanager"
+        "adbusers"
+        "docker"
+      ]; # Enable ‘sudo’ for the user.
+    };
+    lilou = {
+      isNormalUser = true;
+      extraGroups = [
+        "wheel"
+        "networkmanager"
+        "adbusers"
+        "docker"
+      ]; # Enable ‘sudo’ for the user.
+    };
   };
 
   system = {
@@ -151,6 +185,8 @@
       allowReboot = false;
     };
   };
+
+  virtualisation.docker.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -161,6 +197,4 @@
   system.stateVersion = "20.03"; # Did you read the comment?
 
 }
-
-
 
