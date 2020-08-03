@@ -95,6 +95,7 @@
       unzip
       nixfmt
       libreoffice
+      docker-compose
     ];
   };
 
