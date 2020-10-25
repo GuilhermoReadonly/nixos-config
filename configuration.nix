@@ -87,8 +87,6 @@
       jmtpfs
       nmap
       nmap-graphical
-      gcc
-      rustup
       transmission
       transmission-gtk
       opera
