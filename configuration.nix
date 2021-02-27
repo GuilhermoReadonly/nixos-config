@@ -78,7 +78,7 @@
       gnome3.gedit
       git
       killall
-      libsForQt5.vlc
+      vlc
       gimp
       alacritty
       pstree
@@ -95,6 +95,7 @@
       libreoffice
       docker-compose
       kdeApplications.okular
+      gparted
     ];
   };
 
